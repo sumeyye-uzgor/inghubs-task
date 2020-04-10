@@ -1,37 +1,75 @@
-// Import the LitElement base class and html tag function
-import { LitElement, html } from 'lit-element';
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
 
-class MyElement extends LitElement {
+import {LitElement, html, css} from 'lit';
+
+/**
+ * An example element.
+ *
+ * @fires count-changed - Indicates when the count changes
+ * @slot - This element has a slot
+ * @csspart button - The button
+ */
+export class MyElement extends LitElement {
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+        border: solid 1px gray;
+        padding: 16px;
+        max-width: 800px;
+      }
+    `;
+  }
 
   static get properties() {
     return {
-      name: {type: String}
-    }
+      /**
+       * The name to say "Hello" to.
+       * @type {string}
+       */
+      name: {type: String},
+
+      /**
+       * The number of times the button has been clicked.
+       * @type {number}
+       */
+      count: {type: Number},
+    };
   }
 
   constructor() {
     super();
     this.name = 'World';
+    this.count = 0;
   }
 
+  render() {
+    return html`
+      <h1>${this.sayHello(this.name)}!</h1>
+      <button @click=${this._onClick} part="button">
+        Click Count: ${this.count}
+      </button>
+      <slot></slot>
+    `;
+  }
+
+  _onClick() {
+    this.count++;
+    this.dispatchEvent(new CustomEvent('count-changed'));
+  }
 
   /**
-   * Implement `render` to define a template for your element.
-   *
-   * You must provide an implementation of `render` for any element
-   * that uses LitElement as a base class.
+   * Formats a greeting
+   * @param name {string} The name to say "Hello" to
+   * @returns {string} A greeting directed at `name`
    */
-  render(){
-    /**
-     * `render` must return a lit-html `TemplateResult`.
-     *
-     * To create a `TemplateResult`, tag a JavaScript template literal
-     * with the `html` tag function:
-     */
-    return html`
-      <p>Hello, ${this.name}!</p>
-    `;
+  sayHello(name) {
+    return `Hello, ${name}`;
   }
 }
 
-customElements.define('my-element', MyElement);
+window.customElements.define('my-element', MyElement);
