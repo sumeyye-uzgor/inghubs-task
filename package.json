@@ -22,6 +22,7 @@
     "analyze": "cem analyze --litelement --globs \"**/*.js\" --exclude docs",
     "analyze:watch": "cem analyze --litelement --globs \"**/*.js\" --exclude docs --watch",
     "serve": "wds --watch",
+    "dev": "vite",
     "serve:prod": "MODE=prod npm run serve",
     "test": "npm run test:dev && npm run test:prod",
     "test:dev": "wtr",
@@ -39,7 +40,20 @@
   "author": "Google LLC",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "lit": "^3.2.0"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@lit/localize": "^0.12.2",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@vaadin/button": "^24.8.1",
+    "@vaadin/date-picker": "^24.8.1",
+    "@vaadin/dialog": "^24.8.1",
+    "@vaadin/grid": "^24.8.1",
+    "@vaadin/router": "^2.0.0",
+    "@vaadin/select": "^24.8.1",
+    "@vaadin/text-field": "^24.8.1",
+    "lit": "^3.2.0",
+    "lit-redux-watch": "^0.3.8",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.1",
@@ -52,7 +66,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@web/dev-server": "^0.1.31",
     "@web/dev-server-legacy": "^1.0.0",
-    "@web/test-runner": "^0.15.0",
+    "@web/test-runner": "^0.15.3",
     "@web/test-runner-playwright": "^0.9.0",
     "@webcomponents/webcomponentsjs": "^2.8.0",
     "eslint": "^8.15.0",
@@ -60,7 +74,8 @@
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "rollup": "^4.18.0",
-    "rollup-plugin-summary": "^2.0.1"
+    "rollup-plugin-summary": "^2.0.1",
+    "vite": "^7.0.0"
   },
   "customElements": "custom-elements.json"
 }
