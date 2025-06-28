@@ -5,13 +5,31 @@ import '../components/va-table.js';
 import '../components/va-pagination.js';
 import '../components/va-pagination-button.js';
 import '../components/va-card.js';
+import '../components/va-text-field.js';
+import '../components/va-date-picker.js';
+import '../components/va-email.js';
+import '../components/va-select.js';
+import '../components/va-dialog.js';
 
 export class HomePage extends LitElement {
   static get styles() {
     return css``;
   }
+  static properties = {
+    isModalOpen: {state: true},
+  };
+
+  constructor() {
+    super();
+    this.isModalOpen = false;
+  }
 
   render() {
+    const options = [
+      {label: 'Engineering', value: 'engineering'},
+      {label: 'Design', value: 'design'},
+      {label: 'Marketing', value: 'marketing'},
+    ];
     return html`
       <va-button label="this is a button"></va-button>
       <va-button label="Employees" variant="secondary"></va-button>
@@ -93,6 +111,33 @@ export class HomePage extends LitElement {
           position: 'TeamLead',
         }}
       ></va-card>
+      <va-text-field placeholder="Hello" label="First Name"></va-text-field>
+      <va-date-picker placeholder="aSss" label="Date"></va-date-picker>
+      <va-email placeholder="email" label="Email"></va-email>
+      <va-select label="Department" .items=${options}></va-select>
+      <va-button
+        label="Show Modal"
+        variant="primary"
+        @click=${() => (this.isModalOpen = true)}
+      ></va-button>
+
+      ${this.isModalOpen
+        ? html`
+            <va-dialog
+              title="Are you sure?"
+              description="This action cannot be undone."
+              @proceed=${() => {
+                console.log('proceed clicked');
+                this.isModalOpen = false;
+              }}
+              @cancel=${() => {
+                console.log('cancel clicked');
+                this.isModalOpen = false;
+              }}
+              ?opened=${this.isModalOpen}
+            ></va-dialog>
+          `
+        : ''}
     `;
   }
 }
