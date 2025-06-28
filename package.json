@@ -51,6 +51,7 @@
     "@vaadin/icon": "^24.8.1",
     "@vaadin/icons": "^24.8.1",
     "@vaadin/router": "^2.0.0",
+    "@vaadin/scroller": "^24.8.1",
     "@vaadin/select": "^24.8.1",
     "@vaadin/text-field": "^24.8.1",
     "@vaadin/vaadin-icons": "^23.6.0",

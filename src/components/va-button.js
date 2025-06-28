@@ -79,7 +79,6 @@ export class VaButton extends LitElement {
       </vaadin-button>
     `;
   }
-  // style="color: ${this.chooseColor(this.variant, this.color)}"
 
   _onClick() {
     // this.count++;

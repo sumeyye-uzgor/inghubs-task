@@ -1,6 +1,7 @@
 import {LitElement, html, css} from 'lit';
 import '../components/va-button.js';
 import '@vaadin/icon';
+import '../components/va-table.js';
 
 export class HomePage extends LitElement {
   static get styles() {
@@ -41,6 +42,7 @@ export class HomePage extends LitElement {
       <va-button icon="user" variant="icon"></va-button>
       <vaadin-icon icon="vaadin:user" style="color: red"></vaadin-icon>
       <slot></slot>
+      <va-table></va-table>
     `;
   }
 }
