@@ -7,4 +7,14 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  --vaadin-primary-color: #ff6600;
+  --vaadin-tertiary-color: #ff6600;
+  --vaadin-button-tertiary-text-color: #ff6600;
+  --lumo-primary-text-color: #ff6600;
+}
+html {
+  --vaadin-primary-color: #ff6600;
+  --vaadin-tertiary-color: #ff6600;
+  --vaadin-button-tertiary-text-color: #ff6600;
+  --lumo-primary-text-color: #ff6600;
 }

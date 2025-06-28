@@ -8,7 +8,10 @@ export class VaButton extends LitElement {
       :host {
         display: inline-block;
       }
-
+      vaadin-button {
+        flex-grow: 1;
+        width: 100%;
+      }
       vaadin-button[theme~='primary'][theme~='orange'] {
         background-color: var(--color-orange);
         color: var(--color-white);

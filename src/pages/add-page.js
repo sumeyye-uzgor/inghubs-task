@@ -13,7 +13,7 @@ import {LitElement, html, css} from 'lit';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class AboutPage extends LitElement {
+export class AddPage extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -72,4 +72,4 @@ export class AboutPage extends LitElement {
   }
 }
 
-window.customElements.define('about-page', AboutPage);
+window.customElements.define('add-page', AddPage);

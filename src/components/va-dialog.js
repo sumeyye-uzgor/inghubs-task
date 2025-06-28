@@ -1,7 +1,5 @@
 import {LitElement, html, css} from 'lit';
-import '@vaadin/dialog';
-import '../components/va-button';
-import '@vaadin/icon';
+import '../components/va-button.js';
 
 export class VaDialog extends LitElement {
   static properties = {
@@ -11,43 +9,47 @@ export class VaDialog extends LitElement {
   };
 
   static styles = css`
-    vaadin-button[theme~='primary'] {
-      background-color: var(--color-orange);
-      color: white;
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
     }
 
-    vaadin-button[theme~='tertiary'] {
-      border: 1px solid var(--color-purple);
-      color: var(--color-purple);
+    .modal {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 20px;
-      font-weight: bold;
+      font-size: 18px;
       color: var(--color-orange);
-      padding-bottom: 8px;
     }
 
     .modal-description {
       font-size: 16px;
-      margin-bottom: 24px;
     }
 
     .modal-footer {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      justify-content: flex-end;
     }
-
-    .close-button {
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: var(--color-orange);
-      cursor: pointer;
+    .modal-footer va-button {
+      width: 100%;
     }
   `;
 
@@ -60,46 +62,37 @@ export class VaDialog extends LitElement {
 
   render() {
     return html`
-      <vaadin-dialog
-        .opened=${this.opened}
-        .renderer=${this._renderDialog.bind(this)}
-        @opened-changed=${(e) => (this.opened = e.detail.value)}
-      ></vaadin-dialog>
+      ${this.opened
+        ? html`
+            <div class="backdrop" @click=${this._close}>
+              <div class="modal" @click=${(e) => e.stopPropagation()}>
+                <div class="modal-header">
+                  <span>${this.title}</span>
+                  <va-button
+                    icon="close"
+                    variant="icon"
+                    @click=${this._close}
+                  ></va-button>
+                </div>
+                <div class="modal-description">${this.description}</div>
+                <div class="modal-footer">
+                  <va-button variant="primary">Proceed</va-button>
+                  <va-button
+                    variant="secondary"
+                    color="purple"
+                    @click=${this._close}
+                    >Cancel</va-button
+                  >
+                </div>
+              </div>
+            </div>
+          `
+        : null}
     `;
   }
 
-  _renderDialog(root) {
-    if (root.firstChild) return;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = `
-      <div class="modal-header">
-        ${this.title}
-        <va-button class="close-button">&times;</va-button>
-      </div>
-      <div class="modal-description">
-        ${this.description}
-      </div>
-      <div class="modal-footer">
-        <va-button theme="primary" id="proceedBtn">Proceed</va-button>
-        <va-button theme="tertiary" id="cancelBtn">Cancel</va-button>
-      </div>
-    `;
-
-    root.appendChild(wrapper);
-
-    wrapper.querySelector('.close-button').addEventListener('click', () => {
-      this.opened = false;
-    });
-
-    wrapper.querySelector('#cancelBtn').addEventListener('click', () => {
-      this.dispatchEvent(new CustomEvent('cancel'));
-      this.opened = false;
-    });
-
-    wrapper.querySelector('#proceedBtn').addEventListener('click', () => {
-      this.dispatchEvent(new CustomEvent('proceed'));
-      this.opened = false;
-    });
+  _close() {
+    this.opened = false;
   }
 }
 
