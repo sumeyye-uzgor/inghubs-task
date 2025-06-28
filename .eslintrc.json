@@ -2,12 +2,10 @@
   "root": true,
   "extends": ["eslint:recommended"],
   "parser": "@babel/eslint-parser",
-  "globals": {
-    "chai": "readonly"
-  },
   "parserOptions": {
     "requireConfigFile": false,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2022
   },
   "env": {
     "browser": true,

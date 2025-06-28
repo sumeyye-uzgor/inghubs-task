@@ -2,6 +2,8 @@ import {LitElement, html, css} from 'lit';
 import '../components/va-button.js';
 import '@vaadin/icon';
 import '../components/va-table.js';
+import '../components/va-pagination.js';
+import '../components/va-pagination-button.js';
 
 export class HomePage extends LitElement {
   static get styles() {
@@ -37,12 +39,47 @@ export class HomePage extends LitElement {
         color="purple"
         icon="user"
       ></va-button>
+      <va-pagination-button
+        label="1"
+        .onClick=${() => {
+          console.log('clicked 1');
+        }}
+        active
+      ></va-pagination-button>
+      <va-pagination-button
+        label="1"
+        .onClick=${() => {
+          console.log('clicked 1');
+        }}
+        disabled
+      ></va-pagination-button>
+      <va-pagination-button
+        label="..."
+        .onClick=${() => {
+          console.log('clicked dots');
+        }}
+      ></va-pagination-button>
+      <va-pagination-button
+        icon="user"
+        .onClick=${() => {
+          console.log('clicked dots');
+        }}
+        disabled
+      ></va-pagination-button>
+      <va-pagination-button
+        icon="user"
+        .onClick=${() => {
+          console.log('clicked dots');
+        }}
+      ></va-pagination-button>
       <div>only icons</div>
       <va-button icon="user" variant="icon"></va-button>
       <va-button icon="user" variant="icon"></va-button>
       <vaadin-icon icon="vaadin:user" style="color: red"></vaadin-icon>
       <slot></slot>
       <va-table></va-table>
+      <va-pagination totalItemCount="50" pageSize="5"></va-pagination>
+      <va-pagination totalItemCount="50" pageSize="5"></va-pagination>
     `;
   }
 }

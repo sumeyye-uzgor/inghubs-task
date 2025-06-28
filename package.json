@@ -48,6 +48,7 @@
     "@vaadin/date-picker": "^24.8.1",
     "@vaadin/dialog": "^24.8.1",
     "@vaadin/grid": "^24.8.1",
+    "@vaadin/horizontal-layout": "^24.8.1",
     "@vaadin/icon": "^24.8.1",
     "@vaadin/icons": "^24.8.1",
     "@vaadin/router": "^2.0.0",
@@ -55,6 +56,7 @@
     "@vaadin/select": "^24.8.1",
     "@vaadin/text-field": "^24.8.1",
     "@vaadin/vaadin-icons": "^23.6.0",
+    "@vaadin/vertical-layout": "^24.8.1",
     "lit": "^3.2.0",
     "lit-redux-watch": "^0.3.8",
     "redux": "^5.0.1"
@@ -62,7 +64,6 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
-    "@babel/eslint-parser": "^7.17.0",
     "@custom-elements-manifest/analyzer": "^0.6.3",
     "@open-wc/testing": "^4.0.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -73,7 +74,7 @@
     "@web/test-runner": "^0.20.2",
     "@web/test-runner-playwright": "^0.11.1",
     "@webcomponents/webcomponentsjs": "^2.8.0",
-    "eslint": "^8.15.0",
+    "eslint": "^8.57.1",
     "lit-analyzer": "^2.0.3",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
