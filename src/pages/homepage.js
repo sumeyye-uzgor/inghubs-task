@@ -1,74 +1,47 @@
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
 import {LitElement, html, css} from 'lit';
+import '../components/va-button.js';
+import '@vaadin/icon';
 
-/**
- * An example element.
- *
- * @fires count-changed - Indicates when the count changes
- * @slot - This element has a slot
- * @csspart button - The button
- */
 export class HomePage extends LitElement {
   static get styles() {
-    return css`
-      :host {
-        display: block;
-        border: solid 1px gray;
-        padding: 16px;
-        max-width: 800px;
-      }
-    `;
-  }
-
-  static get properties() {
-    return {
-      /**
-       * The name to say "Hello" to.
-       * @type {string}
-       */
-      name: {type: String},
-
-      /**
-       * The number of times the button has been clicked.
-       * @type {number}
-       */
-      count: {type: Number},
-    };
-  }
-
-  constructor() {
-    super();
-    this.name = 'World';
-    this.count = 0;
+    return css``;
   }
 
   render() {
     return html`
-      <h1>HomePage ${this.sayHello(this.name)}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
+      <va-button label="this is a button"></va-button>
+      <va-button label="Employees" variant="secondary"></va-button>
+      <va-button label="Add New" variant="tertiary"></va-button>
+      <va-button label="Employees" color="purple"></va-button>
+      <va-button
+        label="Employees"
+        variant="secondary"
+        color="purple"
+      ></va-button>
+      <va-button label="Add New" variant="tertiary" color="purple"></va-button>
+      <div>with icons</div>
+      <va-button label="this is a button" icon="user"></va-button>
+      <va-button label="Employees" variant="secondary" icon="user"></va-button>
+      <va-button label="Add New" variant="tertiary" icon="user"></va-button>
+      <va-button label="Employees" color="purple" icon="user"></va-button>
+      <va-button
+        label="Employees"
+        variant="secondary"
+        color="purple"
+        icon="user"
+      ></va-button>
+      <va-button
+        label="Add New"
+        variant="tertiary"
+        color="purple"
+        icon="user"
+      ></va-button>
+      <div>only icons</div>
+      <va-button icon="user" variant="icon"></va-button>
+      <va-button icon="user" variant="icon"></va-button>
+      <vaadin-icon icon="vaadin:user" style="color: red"></vaadin-icon>
       <slot></slot>
     `;
-  }
-
-  _onClick() {
-    this.count++;
-    this.dispatchEvent(new CustomEvent('count-changed'));
-  }
-
-  /**
-   * Formats a greeting
-   * @param name {string} The name to say "Hello" to
-   * @returns {string} A greeting directed at `name`
-   */
-  sayHello(name) {
-    return `Hello, ${name}`;
   }
 }
 
