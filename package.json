@@ -45,6 +45,7 @@
     "@lit/localize": "^0.12.2",
     "@reduxjs/toolkit": "^2.8.2",
     "@vaadin/button": "^24.8.1",
+    "@vaadin/card": "^24.8.1",
     "@vaadin/date-picker": "^24.8.1",
     "@vaadin/dialog": "^24.8.1",
     "@vaadin/grid": "^24.8.1",

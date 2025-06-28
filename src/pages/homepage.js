@@ -4,6 +4,7 @@ import '@vaadin/icon';
 import '../components/va-table.js';
 import '../components/va-pagination.js';
 import '../components/va-pagination-button.js';
+import '../components/va-card.js';
 
 export class HomePage extends LitElement {
   static get styles() {
@@ -80,6 +81,18 @@ export class HomePage extends LitElement {
       <va-table></va-table>
       <va-pagination totalItemCount="50" pageSize="5"></va-pagination>
       <va-pagination totalItemCount="50" pageSize="5"></va-pagination>
+      <va-card
+        .item=${{
+          firstName: 'Ahmet',
+          lastName: 'Uzgor',
+          dateOfEmployment: '1.1.2024',
+          dateOfBirth: '10.12.1996',
+          phone: '5456100883',
+          email: 'ahmetuzgor10@gmail.com',
+          department: 'IT',
+          position: 'TeamLead',
+        }}
+      ></va-card>
     `;
   }
 }

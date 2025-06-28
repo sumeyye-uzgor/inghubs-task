@@ -9,4 +9,6 @@ import './src/styles/theme.css';
 
 import '@vaadin/icons/vaadin-iconset.js';
 
+import './src/global.css';
+
 console.log('🚀 Application started');
