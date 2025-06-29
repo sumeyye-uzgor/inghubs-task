@@ -1,5 +1,10 @@
 import {LitElement, html, css} from 'lit';
 import '../components/va-button.js';
+import {store} from '../store/store.js';
+import {selectModalState, closeModal} from '../store/modal-slice.js';
+import {deleteEmployee} from '../store/employee-slice.js';
+import {msg} from '@lit/localize';
+import {Router} from '@vaadin/router';
 
 export class VaDialog extends LitElement {
   static styles = css`
@@ -48,40 +53,62 @@ export class VaDialog extends LitElement {
   `;
 
   static properties = {
-    opened: {type: Boolean},
-    title: {type: String},
-    description: {type: String},
+    modal: {state: true},
   };
 
   constructor() {
     super();
-    this.opened = false;
-    this.title = 'Are you sure?';
-    this.description = '';
+    this.modal = selectModalState(store.getState());
+    this.unsubscribe = store.subscribe(() => {
+      this.modal = selectModalState(store.getState());
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.unsubscribe?.();
+  }
+  _close() {
+    store.dispatch(closeModal());
   }
 
   render() {
+    const {opened, title, description, payload, isConfirmModal} = this.modal;
     return html`
-      ${this.opened
+      ${opened
         ? html`
             <div class="backdrop" @click=${this._close}>
               <div class="modal" @click=${(e) => e.stopPropagation()}>
                 <div class="modal-header">
-                  <span>${this.title}</span>
+                  <span>${title}</span>
                   <va-button
                     icon="close"
                     variant="icon"
                     @click=${this._close}
                   ></va-button>
                 </div>
-                <div class="modal-description">${this.description}</div>
+                <div class="modal-description">${description}</div>
                 <div class="modal-footer">
-                  <va-button variant="primary">Proceed</va-button>
+                  <va-button
+                    variant="primary"
+                    @click=${() => {
+                      if (isConfirmModal) {
+                        store.dispatch(deleteEmployee(payload.id));
+                      } else {
+                        Router.go('/');
+                      }
+                      this._close();
+                    }}
+                    >${isConfirmModal
+                      ? msg('Proceed')
+                      : msg('Go To Home')}</va-button
+                  >
+
                   <va-button
                     variant="secondary"
                     color="purple"
                     @click=${this._close}
-                    >Cancel</va-button
+                    >${msg('Cancel')}</va-button
                   >
                 </div>
               </div>
@@ -89,10 +116,6 @@ export class VaDialog extends LitElement {
           `
         : null}
     `;
-  }
-
-  _close() {
-    this.opened = false;
   }
 }
 

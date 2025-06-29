@@ -90,6 +90,26 @@
   <source>Employee List</source>
   <target>Çalışan Listesi</target>
 </trans-unit>
+<trans-unit id="s2714784162ec459d">
+  <source>Proceed</source>
+  <target>Devam Et</target>
+</trans-unit>
+<trans-unit id="s246af8f1470cf107">
+  <source>Go To Home</source>
+  <target>Anasayfaya Git</target>
+</trans-unit>
+<trans-unit id="s2ceb11be2290bb1b">
+  <source>Cancel</source>
+  <target>İptal Et</target>
+</trans-unit>
+<trans-unit id="sb15e48a6ab4e4c27">
+  <source>Are you sure you want to delete this employee?</source>
+  <target>Bu çalışanı silmek istediğinizden emin misiniz?</target>
+</trans-unit>
+<trans-unit id="s126294f9071f50f5">
+  <source>Selected employee record will be deleted</source>
+  <target>Çalışan kaydı silinecektir</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

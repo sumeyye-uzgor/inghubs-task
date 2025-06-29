@@ -5,6 +5,7 @@ import './pages/home-page.js';
 import './pages/add-page.js';
 import './pages/edit-page.js';
 import './components/va-navbar.js';
+import './components/va-dialog.js';
 
 export class AppRoot extends LitElement {
   constructor() {
@@ -26,6 +27,7 @@ export class AppRoot extends LitElement {
     return html`
       <va-navbar></va-navbar>
       <div id="outlet"></div>
+      <va-dialog></va-dialog>
     `;
   }
 }

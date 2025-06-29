@@ -10,8 +10,12 @@
 
     export const templates = {
       's0a8cad154aa09930': `Pozisyon`,
+'s126294f9071f50f5': `Çalışan kaydı silinecektir`,
 's1e45a4d7635fbda7': `Birim`,
+'s246af8f1470cf107': `Anasayfaya Git`,
+'s2714784162ec459d': `Devam Et`,
 's2c57913ffd36d298': `Ad`,
+'s2ceb11be2290bb1b': `İptal Et`,
 's32c9b3dd030fc24c': `Çalışan Ekle`,
 's3db6c3999daeecdb': `Çalışan Listesi`,
 's53802e3f37d072a7': `Doğum Tarihi`,
@@ -22,6 +26,7 @@
 's8af61807443f32a4': `Aksiyonlar`,
 's8f9e71bb4427e946': `Ad`,
 's95a75a2392af5780': `Soyad`,
+'sb15e48a6ab4e4c27': `Bu çalışanı silmek istediğinizden emin misiniz?`,
 'sb341326bd732c0c7': `Doğum Tarihi`,
 'sc1611c0558728a2a': `Pozisyon`,
 'sc485ed452796ab62': `İşe Giriş Tarihi`,

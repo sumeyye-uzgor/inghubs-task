@@ -2,8 +2,10 @@ import {LitElement, html, css} from 'lit';
 import '@vaadin/grid';
 import '@vaadin/grid/vaadin-grid-column.js';
 import '@vaadin/scroller';
-import {msg, updateWhenLocaleChanges} from '@lit/localize';
+import {msg, str, updateWhenLocaleChanges} from '@lit/localize';
 import {Router} from '@vaadin/router';
+import {store} from '../store/store.js';
+import {openModal} from '../store/modal-slice.js';
 
 export class VaTable extends LitElement {
   static get styles() {
@@ -99,7 +101,19 @@ export class VaTable extends LitElement {
               deleteButton.setAttribute('icon', 'trash');
               deleteButton.setAttribute('variant', 'icon');
               deleteButton.addEventListener('click', () => {
-                console.log('Delete clicked');
+                const employee = rowData.item;
+                store.dispatch(
+                  openModal({
+                    title: msg(
+                      'Are you sure you want to delete this employee?'
+                    ),
+                    description: `${msg(
+                      'Selected employee record will be deleted'
+                    )}: ${employee.firstName} ${employee.lastName}`,
+                    isConfirmModal: true,
+                    payload: {id: rowData.item.id},
+                  })
+                );
               });
               wrapper.appendChild(editButton);
               wrapper.appendChild(deleteButton);

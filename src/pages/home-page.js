@@ -122,20 +122,6 @@ export class HomePage extends LitElement {
             `}
 
         <va-pagination></va-pagination>
-
-        <va-dialog
-          title="Are you sure?"
-          description="This action cannot be undone."
-          @proceed=${() => {
-            console.log('proceed clicked');
-            this.isModalOpen = false;
-          }}
-          @cancel=${() => {
-            console.log('cancel clicked');
-            this.isModalOpen = false;
-          }}
-          ?opened=${this.isModalOpen}
-        ></va-dialog>
       </vaadin-vertical-layout>
     `;
   }

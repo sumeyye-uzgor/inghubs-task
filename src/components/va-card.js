@@ -3,6 +3,8 @@ import '@vaadin/card';
 import {Router} from '@vaadin/router';
 import './va-button.js';
 import {msg, updateWhenLocaleChanges} from '@lit/localize';
+import {store} from '../store/store.js';
+import {openModal} from '../store/modal-slice.js';
 
 export class VaCard extends LitElement {
   static styles = css`
@@ -63,7 +65,16 @@ export class VaCard extends LitElement {
   }
 
   handleDelete() {
-    console.log('modal open');
+    store.dispatch(
+      openModal({
+        title: msg('Are you sure you want to delete this employee?'),
+        description: `${msg('Selected employee record will be deleted')}: ${
+          this.item.firstName
+        } ${this.item.lastName}`,
+        isConfirmModal: true,
+        payload: {id: this.item.id},
+      })
+    );
   }
 
   renderField(label, value) {
