@@ -1,22 +1,24 @@
 import {LitElement, html} from 'lit';
 import {Router} from '@vaadin/router';
-import './pages/homepage.js';
+
+import './pages/home-page.js';
 import './pages/add-page.js';
 import './pages/edit-page.js';
-
 import './components/va-navbar.js';
 
-import {setLocale} from './utils/localization.js';
-
 export class AppRoot extends LitElement {
+  constructor() {
+    super();
+  }
+
   firstUpdated() {
-    setLocale('en');
     const outlet = this.renderRoot.querySelector('#outlet');
+
     const router = new Router(outlet);
     router.setRoutes([
       {path: '/', component: 'home-page'},
       {path: '/add', component: 'add-page'},
-      {path: '/edit', component: 'edit-page'},
+      {path: '/edit/:id', component: 'edit-page'},
     ]);
   }
 
@@ -28,4 +30,4 @@ export class AppRoot extends LitElement {
   }
 }
 
-window.customElements.define('app-root', AppRoot);
+customElements.define('app-root', AppRoot);

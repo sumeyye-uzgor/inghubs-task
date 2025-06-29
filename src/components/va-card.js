@@ -1,16 +1,23 @@
 import {LitElement, html, css} from 'lit';
 import '@vaadin/card';
+import {Router} from '@vaadin/router';
 import './va-button.js';
+import {msg, updateWhenLocaleChanges} from '@lit/localize';
 
 export class VaCard extends LitElement {
   static styles = css`
     .card {
-      max-width: 450px;
+      width: 300px;
       padding: 16px;
       background-color: var(--color-white);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       font-family: 'Inter', sans-serif;
+    }
+    @media screen and (min-width: 500px) {
+      .card {
+        width: 450px;
+      }
     }
 
     .row {
@@ -52,6 +59,11 @@ export class VaCard extends LitElement {
   constructor() {
     super();
     this.item = {};
+    updateWhenLocaleChanges(this);
+  }
+
+  handleDelete() {
+    console.log('modal open');
   }
 
   renderField(label, value) {
@@ -78,24 +90,33 @@ export class VaCard extends LitElement {
     return html`
       <div class="card">
         <div class="row">
-          ${this.renderField('First Name: ', firstName)}
-          ${this.renderField('Last Name: ', lastName)}
+          ${this.renderField(msg('First Name:'), firstName)}
+          ${this.renderField(msg('Last Name:'), lastName)}
         </div>
         <div class="row">
-          ${this.renderField('Date of Employment: ', dateOfEmployment)}
-          ${this.renderField('Date of Birth: ', dateOfBirth)}
+          ${this.renderField(msg('Date of Employment:'), dateOfEmployment)}
+          ${this.renderField(msg('Date of Birth:'), dateOfBirth)}
         </div>
         <div class="row">
-          ${this.renderField('Phone: ', phone)}
-          ${this.renderField('Email: ', email)}
+          ${this.renderField(msg('Phone:'), phone)}
+          ${this.renderField(msg('Email:'), email)}
         </div>
         <div class="row">
-          ${this.renderField('Department: ', department)}
-          ${this.renderField('Position: ', position)}
+          ${this.renderField(msg('Department:'), department)}
+          ${this.renderField(msg('Position:'), position)}
         </div>
         <div class="actions">
-          <va-button color="purple" icon="edit">Edit</va-button>
-          <va-button icon="trash">Delete</va-button>
+          <va-button
+            color="purple"
+            icon="edit"
+            .label=${msg('Edit')}
+            @click=${() => Router.go(`/edit/${this.item.id}`)}
+          ></va-button>
+          <va-button
+            icon="trash"
+            .label=${msg('Delete')}
+            @click=${this.handleDelete}
+          ></va-button>
         </div>
       </div>
     `;

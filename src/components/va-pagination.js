@@ -6,7 +6,15 @@ import '@vaadin/icon';
 import '@vaadin/icons';
 import '@vaadin/text-field';
 import './va-pagination-button';
+
 import {html, LitElement, css} from 'lit';
+import {store} from '../store/store.js';
+import {
+  selectCurrentPage,
+  selectPageSize,
+  selectTotalCount,
+  setCurrentPage,
+} from '../store/employee-slice.js';
 
 export class VaPagination extends LitElement {
   static styles = css`
@@ -15,53 +23,53 @@ export class VaPagination extends LitElement {
       justify-content: center;
     }
   `;
-  static properties = {
-    totalItemCount: {type: Number},
-    pageSize: {type: Number},
-    currentPage: {state: true},
-  };
 
   constructor() {
     super();
-    this.totalItemCount = 0;
-    this.pageSize = 0;
-    this.currentPage = 1;
+    this.unsubscribe = store.subscribe(() => this.requestUpdate());
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.unsubscribe?.();
+  }
+
+  get currentPage() {
+    return selectCurrentPage(store.getState());
+  }
+
+  get pageSize() {
+    return selectPageSize(store.getState());
+  }
+
+  get totalItemCount() {
+    return selectTotalCount(store.getState());
+  }
+
   get pageCount() {
     return Math.ceil(this.totalItemCount / this.pageSize);
   }
 
   handleClick(page) {
-    this.currentPage = page;
-    this._dispatchPageChange();
+    store.dispatch(setCurrentPage(page));
   }
 
   handlePrev() {
     if (this.currentPage > 1) {
-      this.currentPage -= 1;
-      this._dispatchPageChange();
+      store.dispatch(setCurrentPage(this.currentPage - 1));
     }
   }
 
   handleNext() {
     if (this.currentPage < this.pageCount) {
-      this.currentPage += 1;
-      this._dispatchPageChange();
+      store.dispatch(setCurrentPage(this.currentPage + 1));
     }
   }
-  _dispatchPageChange() {
-    this.dispatchEvent(
-      new CustomEvent('page-changed', {
-        detail: {
-          currentPage: this.currentPage,
-          pageSize: this.pageSize,
-        },
-        bubbles: true,
-        composed: true,
-      })
-    );
-  }
-  _renderPages() {
+
+  _renderPages(
+    _renderPageButton = this._renderPageButton.bind(this),
+    _renderDots = this._renderDots.bind(this)
+  ) {
     const buttons = [];
     const isMobile = window.innerWidth < 768;
     const maxVisiblePages = isMobile ? 3 : 6;
@@ -71,7 +79,7 @@ export class VaPagination extends LitElement {
 
     if (total <= maxVisiblePages) {
       for (let i = 1; i <= total; i++) {
-        buttons.push(this._renderPageButton(i));
+        buttons.push(_renderPageButton(i));
       }
     } else {
       const sideCount = Math.floor((maxVisiblePages - 2) / 2);
@@ -88,21 +96,21 @@ export class VaPagination extends LitElement {
         end = Math.min(total - 1, 1 + (maxVisiblePages - 2));
       }
 
-      buttons.push(this._renderPageButton(1));
+      buttons.push(_renderPageButton(1));
 
       if (start > 2) {
-        buttons.push(this._renderDots());
+        buttons.push(_renderDots());
       }
 
       for (let i = start; i <= end; i++) {
-        buttons.push(this._renderPageButton(i));
+        buttons.push(_renderPageButton(i));
       }
 
       if (end < total - 1) {
-        buttons.push(this._renderDots());
+        buttons.push(_renderDots());
       }
 
-      buttons.push(this._renderPageButton(total));
+      buttons.push(_renderPageButton(total));
     }
 
     return buttons;
@@ -121,8 +129,7 @@ export class VaPagination extends LitElement {
       label="..."
       @click=${() => {
         const nextSet = Math.min(this.pageCount, this.currentPage + 3);
-        this.currentPage = nextSet;
-        this._dispatchPageChange();
+        store.dispatch(setCurrentPage(nextSet));
       }}
     ></va-pagination-button>`;
   }
@@ -145,4 +152,5 @@ export class VaPagination extends LitElement {
     `;
   }
 }
+
 window.customElements.define('va-pagination', VaPagination);

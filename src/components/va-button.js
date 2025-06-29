@@ -67,10 +67,7 @@ export class VaButton extends LitElement {
 
   render() {
     return html`
-      <vaadin-button
-        @click=${this._onClick}
-        theme="${this.variant} ${this.color}"
-      >
+      <vaadin-button theme="${this.variant} ${this.color}">
         ${this.icon
           ? html`<vaadin-icon
               icon="vaadin:${this.icon}"
@@ -83,11 +80,6 @@ export class VaButton extends LitElement {
     `;
   }
 
-  _onClick() {
-    // this.count++;
-    // this.dispatchEvent(new CustomEvent('count-changed'));
-    console.log('button clicked');
-  }
   chooseColor(variant, color) {
     if (variant === 'primary') {
       return 'white';

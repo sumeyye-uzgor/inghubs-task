@@ -2,12 +2,6 @@ import {LitElement, html, css} from 'lit';
 import '../components/va-button.js';
 
 export class VaDialog extends LitElement {
-  static properties = {
-    opened: {type: Boolean},
-    title: {type: String},
-    description: {type: String},
-  };
-
   static styles = css`
     .backdrop {
       position: fixed;
@@ -52,6 +46,12 @@ export class VaDialog extends LitElement {
       width: 100%;
     }
   `;
+
+  static properties = {
+    opened: {type: Boolean},
+    title: {type: String},
+    description: {type: String},
+  };
 
   constructor() {
     super();

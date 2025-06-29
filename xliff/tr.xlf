@@ -10,6 +10,86 @@
   <source>Add Employee</source>
   <target>Çalışan Ekle</target>
 </trans-unit>
+<trans-unit id="s2c57913ffd36d298">
+  <source>First Name</source>
+  <target>Ad</target>
+</trans-unit>
+<trans-unit id="s95a75a2392af5780">
+  <source>Last Name</source>
+  <target>Soyad</target>
+</trans-unit>
+<trans-unit id="s772528836550622c">
+  <source>Date of Employment</source>
+  <target>İşe Giriş Tarihi</target>
+</trans-unit>
+<trans-unit id="s53802e3f37d072a7">
+  <source>Date of Birth</source>
+  <target>Doğum Tarihi</target>
+</trans-unit>
+<trans-unit id="sf1bc83d2509bafcf">
+  <source>Phone</source>
+  <target>Telefon</target>
+</trans-unit>
+<trans-unit id="sd1f44f1a8bc20e67">
+  <source>Email</source>
+  <target>E-posta</target>
+</trans-unit>
+<trans-unit id="s1e45a4d7635fbda7">
+  <source>Department</source>
+  <target>Birim</target>
+</trans-unit>
+<trans-unit id="sc1611c0558728a2a">
+  <source>Position</source>
+  <target>Pozisyon</target>
+</trans-unit>
+<trans-unit id="s8af61807443f32a4">
+  <source>Actions</source>
+  <target>Aksiyonlar</target>
+</trans-unit>
+<trans-unit id="s8f9e71bb4427e946">
+  <source>First Name:</source>
+    <target>Ad</target>
+</trans-unit>
+<trans-unit id="sfab5e4723ff2110e">
+  <source>Last Name:</source>
+    <target>Soyad</target>
+</trans-unit>
+<trans-unit id="sc485ed452796ab62">
+  <source>Date of Employment:</source>
+  <target>İşe Giriş Tarihi</target>
+</trans-unit>
+<trans-unit id="sb341326bd732c0c7">
+  <source>Date of Birth:</source>
+  <target>Doğum Tarihi</target>
+</trans-unit>
+<trans-unit id="s5f03f35ef88bfd4f">
+  <source>Phone:</source>
+  <target>Telefon</target>
+</trans-unit>
+<trans-unit id="s8430c71b7abe6807">
+  <source>Email:</source>
+  <target>E-posta</target>
+</trans-unit>
+<trans-unit id="sd014b6fddbaf31c7">
+  <source>Department:</source>
+  <target>Birim</target>
+</trans-unit>
+<trans-unit id="s0a8cad154aa09930">
+  <source>Position:</source>
+  <target>Pozisyon</target>
+</trans-unit>
+<trans-unit id="s64ef2a6c2dd1d3d1">
+  <source>Edit</source>
+    <target>Düzenle</target>
+</trans-unit>
+<trans-unit id="sdc673e73b5c13aea">
+  <source>Delete</source>
+    <target>Sil</target>
+</trans-unit>
+<trans-unit id="s3db6c3999daeecdb">
+  <source>Employee List</source>
+  <target>Çalışan Listesi</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

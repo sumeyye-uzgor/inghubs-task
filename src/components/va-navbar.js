@@ -2,6 +2,7 @@ import {LitElement, html, css} from 'lit';
 import '../components/va-button.js';
 import {msg} from '@lit/localize';
 import {setLocale, getLocale} from '../utils/localization.js';
+import {Router} from '@vaadin/router';
 
 export class VaNavbar extends LitElement {
   static styles = css`
@@ -105,7 +106,7 @@ export class VaNavbar extends LitElement {
             variant="tertiary"
             icon="user"
             .label=${msg('Employees')}
-            @click=${() => (window.location.href = '/')}
+            @click=${() => Router.go('/')}
             ?color=${this.activePage === '/' ? 'orange' : ''}
             class=${this.activePage === '/add' || this.activePage === '/edit'
               ? 'faded'
@@ -116,7 +117,7 @@ export class VaNavbar extends LitElement {
             variant="tertiary"
             icon="plus"
             .label=${msg('Add Employee')}
-            @click=${() => (window.location.href = '/add')}
+            @click=${() => Router.go('/add')}
             ?color=${this.activePage === '/add' ? 'orange' : ''}
             class=${this.activePage === '/' || this.activePage === '/edit'
               ? 'faded'
@@ -130,7 +131,6 @@ export class VaNavbar extends LitElement {
                   alt="TR"
                   class="flag"
                   @click=${async () => {
-                    console.log('onClick', getLocale());
                     await setLocale('tr');
                     this.currentLang = 'tr';
                   }}
@@ -142,7 +142,6 @@ export class VaNavbar extends LitElement {
                   alt="EN"
                   class="flag"
                   @click=${async () => {
-                    console.log('onClick', getLocale());
                     await setLocale('en');
                     this.currentLang = 'en';
                   }}
