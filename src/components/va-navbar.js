@@ -11,10 +11,16 @@ export class VaNavbar extends LitElement {
       background-color: white;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       padding: 12px 24px;
+      position: sticky;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 9999;
     }
 
     .navbar {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
     }
@@ -108,9 +114,7 @@ export class VaNavbar extends LitElement {
             .label=${msg('Employees')}
             @click=${() => Router.go('/')}
             ?color=${this.activePage === '/' ? 'orange' : ''}
-            class=${this.activePage === '/add' || this.activePage === '/edit'
-              ? 'faded'
-              : ''}
+            class=${this.activePage !== '/' ? 'faded' : ''}
           ></va-button>
 
           <va-button
@@ -119,9 +123,7 @@ export class VaNavbar extends LitElement {
             .label=${msg('Add Employee')}
             @click=${() => Router.go('/add')}
             ?color=${this.activePage === '/add' ? 'orange' : ''}
-            class=${this.activePage === '/' || this.activePage === '/edit'
-              ? 'faded'
-              : ''}
+            class=${this.activePage !== '/add' ? 'faded' : ''}
           ></va-button>
 
           ${this.currentLang === 'en'

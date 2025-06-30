@@ -69,6 +69,8 @@ export class VaDialog extends LitElement {
     this.unsubscribe?.();
   }
   _close() {
+    Router.go('/');
+
     store.dispatch(closeModal());
   }
 

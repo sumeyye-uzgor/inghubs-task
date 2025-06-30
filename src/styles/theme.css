@@ -4,9 +4,13 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray: #bbb6b6;
+  --color-background: #f8f8f8;
   --vaadin-button-tertiary-text-color: var(--color-orange);
   --vaadin-focus-ring-color: var(--color-orange);
   --vaadin-card-background: rgba(252, 99, 4, 0.1);
   --lumo-primary-color-10pct: rgba(252, 99, 4, 0.1);
   --vaadin-selection-color: var(--color-orange);
+}
+html {
+  background-color: var(--color-background);
 }

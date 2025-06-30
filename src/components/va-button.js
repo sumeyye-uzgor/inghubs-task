@@ -55,6 +55,7 @@ export class VaButton extends LitElement {
     icon: {type: String},
     variant: {type: String},
     color: {type: String},
+    disabled: {type: Boolean, reflect: true},
   };
 
   constructor() {
@@ -63,23 +64,24 @@ export class VaButton extends LitElement {
     this.label = '';
     this.variant = 'primary';
     this.color = 'orange';
+    this.disabled = false;
   }
 
-  render() {
-    return html`
-      <vaadin-button theme="${this.variant} ${this.color}">
-        ${this.icon
-          ? html`<vaadin-icon
-              icon="vaadin:${this.icon}"
-              slot="prefix"
-              style="color: ${this.chooseColor(this.variant, this.color)}"
-            ></vaadin-icon>`
-          : ''}
-        ${this.label ? this.label : html`<slot></slot>`}
-      </vaadin-button>
-    `;
-  }
+  _handleClick(e) {
+    if (this.disabled) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      return;
+    }
 
+    this.dispatchEvent(
+      new CustomEvent('click', {
+        detail: e.detail,
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
   chooseColor(variant, color) {
     if (variant === 'primary') {
       return 'white';
@@ -90,6 +92,24 @@ export class VaButton extends LitElement {
         return 'var(--color-orange)';
       }
     }
+  }
+  render() {
+    return html`
+      <vaadin-button
+        theme="${this.variant} ${this.color}"
+        ?disabled=${this.disabled}
+        @click=${this._onClick}
+      >
+        ${this.icon
+          ? html`<vaadin-icon
+              icon="vaadin:${this.icon}"
+              slot="prefix"
+              style="color: ${this.chooseColor(this.variant, this.color)}"
+            ></vaadin-icon>`
+          : ''}
+        ${this.label ? this.label : html`<slot></slot>`}
+      </vaadin-button>
+    `;
   }
 }
 

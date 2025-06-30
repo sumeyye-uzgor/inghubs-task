@@ -4,7 +4,7 @@ import {msg} from '@lit/localize';
 import {store} from '../store/store';
 import {setFieldError} from '../store/form-slice';
 
-export class VaTextField extends LitElement {
+export class VaPhoneInput extends LitElement {
   static styles = css`
     vaadin-text-field::part(input-field) {
       background-color: var(--color-white);
@@ -26,36 +26,51 @@ export class VaTextField extends LitElement {
   `;
 
   static properties = {
-    label: {type: String},
     value: {type: String},
     name: {type: String},
-    placeholder: {type: String},
-    errorMessage: {state: true},
     onChange: {type: Function},
+    errorMessage: {state: true},
   };
 
   constructor() {
     super();
-    this.label = '';
-    this.placeholder = '';
     this.errorMessage = '';
   }
-
   render() {
     return html`
       <vaadin-text-field
-        theme="outlined"
-        .label=${this.label}
-        .value=${this.value}
-        .placeholder=${this.placeholder}
         required
-        .errorMessage="${this.errorMessage}"
+        minlength="10"
+        maxlength="10"
+        label=${msg('Phone')}
+        .value=${this.value}
         @value-changed=${this.onChange}
+        pattern="^[1-9][0-9]{9}$"
+        allowed-char-pattern="[0-9]"
+        helper-text=${msg('Enter 10-digit phone number, not starting with 0')}
+        .errorMessage="${this.errorMessage}"
         @validated="${(event) => {
           const field = event.target;
           const {validity} = field.inputElement;
           if (validity.valueMissing) {
             this.errorMessage = msg('Field is required');
+            store.dispatch(
+              setFieldError({fieldName: this.name, hasError: true})
+            );
+          } else if (validity.tooShort) {
+            this.errorMessage = msg('Phone should contain 10 numbers');
+            store.dispatch(
+              setFieldError({fieldName: this.name, hasError: true})
+            );
+          } else if (validity.tooLong) {
+            this.errorMessage = this.errorMessage = msg(
+              'Phone should contain 10 numbers'
+            );
+            store.dispatch(
+              setFieldError({fieldName: this.name, hasError: true})
+            );
+          } else if (validity.patternMismatch) {
+            this.errorMessage = msg('Invalid phone number format');
             store.dispatch(
               setFieldError({fieldName: this.name, hasError: true})
             );
@@ -71,4 +86,4 @@ export class VaTextField extends LitElement {
   }
 }
 
-customElements.define('va-text-field', VaTextField);
+customElements.define('va-phone-input', VaPhoneInput);

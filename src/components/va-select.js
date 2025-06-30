@@ -2,6 +2,9 @@ import {LitElement, html, css} from 'lit';
 import '@vaadin/select';
 import '@vaadin/list-box';
 import '@vaadin/item';
+import {msg} from '@lit/localize';
+import {store} from '../store/store';
+import {setFieldError} from '../store/form-slice';
 
 export class VaSelect extends LitElement {
   static styles = css`
@@ -30,18 +33,36 @@ export class VaSelect extends LitElement {
   `;
 
   static properties = {
+    placeholder: {type: String},
     label: {type: String},
     value: {type: String},
+    name: {type: String},
     items: {type: Array},
+    onChange: {type: Function},
+    errorMessage: {state: true},
   };
 
   constructor() {
     super();
     this.label = '';
     this.value = '';
-    this.items = [];
+    this.errorMessage = '';
   }
 
+  _onChange(e) {
+    this.onChange(e);
+    this._validate();
+  }
+
+  _validate() {
+    if (!this.value || this.value === 'default') {
+      this.errorMessage = msg('Field is required');
+      store.dispatch(setFieldError({fieldName: this.name, hasError: true}));
+    } else {
+      this.errorMessage = '';
+      store.dispatch(setFieldError({fieldName: this.name, hasError: false}));
+    }
+  }
   render() {
     return html`
       <vaadin-select
@@ -49,7 +70,12 @@ export class VaSelect extends LitElement {
         .label=${this.label}
         .value=${this.value}
         .items=${this.items}
-        @value-changed=${(e) => (this.value = e.detail.value)}
+        .placeholder=${this.placeholder}
+        required
+        .errorMessage=${this.errorMessage}
+        .invalid=${!!this.errorMessage}
+        @value-changed=${this._onChange}
+        @blur=${this._validate}
       >
       </vaadin-select>
     `;

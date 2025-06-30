@@ -9,7 +9,6 @@ import '../components/va-table.js';
 import '../components/va-button.js';
 import '../components/va-pagination.js';
 import '../components/va-card.js';
-import '../components/va-dialog.js';
 import {
   setCurrentPage,
   selectVisibleEmployees,

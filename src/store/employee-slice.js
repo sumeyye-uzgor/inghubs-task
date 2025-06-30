@@ -18,7 +18,7 @@ export const employeeSlice = createSlice({
       state.employees.push(action.payload);
     },
     updateEmployee: (state, action) => {
-      const {id, updatedData} = action.payload;
+      const {id, ...updatedData} = action.payload;
       const index = state.employees.findIndex((emp) => emp.id === id);
       if (index !== -1) {
         state.employees[index] = {
@@ -59,3 +59,5 @@ export const selectVisibleEmployees = (state) => {
   const start = (currentPage - 1) * pageSize;
   return employees.slice(start, start + pageSize);
 };
+export const selectEmployeeById = (state, id) =>
+  state.employee.employees.find((emp) => emp.id === id);

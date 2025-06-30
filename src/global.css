@@ -11,10 +11,17 @@ body {
   --vaadin-tertiary-color: #ff6600;
   --vaadin-button-tertiary-text-color: #ff6600;
   --lumo-primary-text-color: #ff6600;
+  padding: 0;
+  margin: 0;
 }
+
 html {
   --vaadin-primary-color: #ff6600;
   --vaadin-tertiary-color: #ff6600;
   --vaadin-button-tertiary-text-color: #ff6600;
   --lumo-primary-text-color: #ff6600;
+  --color-background: #f8f8f8;
+  background-color: var(--color-background);
+  padding: 0;
+  margin: 0;
 }
