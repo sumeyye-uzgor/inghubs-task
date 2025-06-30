@@ -115,19 +115,13 @@ export class VaForm extends LitElement {
   }
   render() {
     const positions = [
-      {label: 'Expert', value: 'Expert'},
       {label: 'Junior', value: 'Junior'},
-      {label: 'Manager', value: 'Manager'},
-      {label: 'Director', value: 'Director'},
       {label: 'Senior', value: 'Senior'},
-      {label: 'TeamLead', value: 'TeamLead'},
+      {label: 'Middle', value: 'Middle'},
     ];
     const departments = [
-      {label: 'Design', value: 'Design'},
-      {label: 'Finance', value: 'Finance'},
-      {label: 'HR', value: 'HR'},
-      {label: 'IT', value: 'IT'},
-      {label: 'Marketing', value: 'Marketing'},
+      {label: 'Tech', value: 'Tech'},
+      {label: 'Analytics', value: 'Analytics'},
     ];
 
     return html`
